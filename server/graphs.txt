@@ -1,0 +1,15 @@
+https://www.kaggle.com/code/leilahasan/google-stock-prediction
+
+https://www.kaggle.com/code/bhanupratapbiswas/stock-market-performance
+
+https://www.kaggle.com/code/guillemservera/eda-with-plotly-precious-metals-futures-data
+
+https://www.kaggle.com/code/pujithagrandhi/cardano-data-analysis
+
+https://www.kaggle.com/code/ahmadwaleed1/bitcoin-price-eda-visualization
+
+https://www.kaggle.com/code/moh3we5/netflix-stock-price-prediction
+
+https://www.kaggle.com/code/guillemservera/eda-with-plotly-energy-futures-prices
+
+https://www.kaggle.com/code/himanshukumar7079/tcs-stockprice-prediction
