@@ -18,6 +18,10 @@ const HomePage = () => {
         navigate('/stimulator')
     };
 
+    const handleStockVis = () => {
+        navigate('/dashboard')
+    };
+
     return (
         <ChakraProvider>
             <Flex
@@ -56,6 +60,7 @@ const HomePage = () => {
                         leftIcon={<FontAwesomeIcon icon={faMoneyCheckDollar} />}
                         css={buttonStyles}
                         mb="4"
+                        onClick={handleStockVis}
                     >
                         Stock Visualization
                     </Button>

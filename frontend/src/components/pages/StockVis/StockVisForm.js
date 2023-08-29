@@ -8,13 +8,15 @@ import {
     Input,
     Select,
     Button,
+    useColorMode,
 } from '@chakra-ui/react';
 
-function Form() {
+function StockVisForm() {
+    const { colorMode } = useColorMode();
     const [symbol, setSymbol] = useState('');
-    const [interval, setInterval] = useState('1min');
-    const [functioncall, setFunctioncall] = useState('TIME_SERIES_INTRADAY');
-    const [downloadCSV, setDownloadCSV] = useState('Yes');
+    const [interval, setInterval] = useState();
+    const [functioncall, setFunctioncall] = useState();
+    const [downloadCSV, setDownloadCSV] = useState();
 
     const handleChange = (e, field) => {
         switch (field) {
@@ -49,6 +51,7 @@ function Form() {
 
     const sendDataToServer = async (data) => {
         try {
+            console.log(data);
             const response = await axios.post('http://127.0.0.1:5000/submit', data);
             console.log(response.data.message);
         } catch (error) {
@@ -57,7 +60,7 @@ function Form() {
     };
 
     return (
-        <Box p={4} bg="white" borderRadius="md" boxShadow="md">
+        <Box p={4}  borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
             <Heading mb={4}>Fill in the details:</Heading>
             <form onSubmit={handleSubmit}>
                 <FormControl mb={4}>
@@ -119,4 +122,4 @@ function Form() {
     );
 }
 
-export default Form;
+export default StockVisForm;
