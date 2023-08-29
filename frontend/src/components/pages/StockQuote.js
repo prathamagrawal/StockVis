@@ -29,8 +29,6 @@ function StockQuote() {
     };
 
     return (
-        <Box
-            p={4}>
             <VStack spacing={4} >
                 <form>
                     <Box>
@@ -57,13 +55,23 @@ function StockQuote() {
                             </Select>
                         </label>
                     </Box>
+                    <Box>
+                        <label>
+                            Select Amount to be Invested (USD):
+                            <Select value={selectedTime} onChange={handleTimeChange}>
+                                <option value="">Select an option</option>
+                                <option value="10">10$ </option>
+                                <option value="100">100$ </option>
+                                <option value="1000">1000$ </option>
+                            </Select>
+                        </label>
+                    </Box>
                     <br />
                     <Button type="submit" colorScheme="blue">
                         Submit
                     </Button>
                 </form>
             </VStack>
-        </Box>
     );
 }
 
