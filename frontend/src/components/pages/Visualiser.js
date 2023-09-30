@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
-import StockVisForm from './StockVis/StockVisForm';
-import Dashboard from './StockVis/Dashboard';
+import StockVisForm from './Visualiser/StockVisForm';
+import Dashboard from './Visualiser/Dashboard';
 
-function StockVis(){
+function Visualiser(){
     return (
         <Flex>
             <Box>
@@ -14,4 +14,4 @@ function StockVis(){
     );
 }
 
-export default StockVis;
+export default Visualiser;

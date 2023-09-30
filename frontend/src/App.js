@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Loader from './components/Loader/Loader';
 import Home from './components/Home';
 import Stimulator from './components/pages/Stimulator';
-import StockVis from './components/pages/StockVis';
+import Visualiser from './components/pages/Visualiser';
 import { Box } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element ={<Home/>}></Route>
             <Route path="/stimulator" element ={<Stimulator/>}></Route>
-            <Route path="/dashboard" element ={<StockVis/>}></Route>
+            <Route path="/dashboard" element ={<Visualiser/>}></Route>
             
           </Routes>
         )}
