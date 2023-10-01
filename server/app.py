@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from DatabaseLoader.dataLoader import getData
 import json
 import pandas
 app = Flask(__name__)
-CORS(app, origins="http://localhost:3000")
+CORS(app, origins="http://localhost:3000",resources={r"/*":{"origins":"*"}})
 
 with open('./DatabaseLoader/env.json', "r") as json_file:
     key = json.load(json_file)
@@ -12,6 +12,7 @@ alphaKey=key['ALPHA_KEY']
 
 
 @app.route('/submit', methods=['POST'])
+@cross_origin(origin='*')
 def submit_form():
     response = request.json 
     data,metadata=getData(response,alphaKey)
