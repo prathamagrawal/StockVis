@@ -10,6 +10,7 @@ import {
     Button,
     useColorMode,
 } from '@chakra-ui/react';
+import StockDataTable  from './StockDataTable';
 
 function StockVisForm() {
     const { colorMode } = useColorMode();
@@ -17,6 +18,8 @@ function StockVisForm() {
     const [interval, setInterval] = useState();
     const [functioncall, setFunctioncall] = useState();
     const [downloadCSV, setDownloadCSV] = useState();
+    const [stockData, setStockData] = useState(null); 
+    const [showDataTable, setShowDataTable] = useState(false); 
 
     const handleChange = (e, field) => {
         switch (field) {
@@ -51,16 +54,19 @@ function StockVisForm() {
 
     const sendDataToServer = async (data) => {
         try {
+
             console.log(data);
             const response = await axios.post('http://127.0.0.1:5000/submit', data);
             const getResponse = await axios.get('http://127.0.0.1:5000/submit');
             console.log('GET Response:', getResponse);
-
-
-
+            setStockData(getResponse.data);
+            setShowDataTable(true);
+            const rawdata=getResponse.data;
+            console.table(rawdata);
         } catch (error) {
             console.error('Error sending data:', error);
         }
+
     };
 
     return (
@@ -122,6 +128,7 @@ function StockVisForm() {
                     Submit
                 </Button>
             </form>
+            {showDataTable && <StockDataTable data={stockData} />}
         </Box>
     );
 }
