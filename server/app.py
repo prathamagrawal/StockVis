@@ -10,20 +10,21 @@ with open('./DatabaseLoader/env.json', "r") as json_file:
     key = json.load(json_file)
 alphaKey=key['ALPHA_KEY']   
 
+fetchdata={}
 
-@app.route('/submit', methods=['POST'])
+@app.route('/submit', methods=['POST','GET'])
 @cross_origin(origin='*')
 def submit_form():
-    response = request.json 
-    data,metadata=getData(response,alphaKey)
-    print(data)
-    print(metadata)
-    return jsonify(response)
+    if(request.method == 'POST'):
+        response = request.json 
+        data,metadata=getData(response,alphaKey)
+        fetchdata["raw"]=data
+        print(data)
+        return jsonify(response)
+    if(request.method =='GET'):
+        # return jsonify({"Message":"Success"})
+        return jsonify(fetchdata["raw"].to_dict(orient="records"))
 
-@app.route('/getData', methods=['GET'])
-def get_dataframe():
-    df = pandas.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
-    return jsonify(df.to_dict(orient='records'))
 
 if __name__ == '__main__':
     app.run(debug=True)

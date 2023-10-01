@@ -53,7 +53,11 @@ function StockVisForm() {
         try {
             console.log(data);
             const response = await axios.post('http://127.0.0.1:5000/submit', data);
-            console.log(response.data.message);
+            const getResponse = await axios.get('http://127.0.0.1:5000/submit');
+            console.log('GET Response:', getResponse);
+
+
+
         } catch (error) {
             console.error('Error sending data:', error);
         }
