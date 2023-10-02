@@ -1,14 +1,14 @@
 import React from 'react';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import StockVisForm from './Visualiser/StockVisForm';
 
-function Visualiser(){
+
+function Visualiser() {
     return (
-        <Flex>
-            <Box>
+
+            <Box> {/* First column, smaller */}
                 <StockVisForm />
             </Box>
-        </Flex>
     );
 }
 
