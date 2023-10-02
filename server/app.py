@@ -18,11 +18,13 @@ def submit_form():
     if(request.method == 'POST'):
         response = request.json 
         data,metadata=getData(response,alphaKey)
+        data['date'] = data.index
         fetchdata["raw"]=data
+        
         print(data)
         return jsonify(response)
     if(request.method =='GET'):
-        # return jsonify({"Message":"Success"})
+
         return jsonify(fetchdata["raw"].to_dict(orient="records"))
 
 

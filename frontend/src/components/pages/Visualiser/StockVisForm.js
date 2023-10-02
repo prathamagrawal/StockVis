@@ -12,6 +12,7 @@ import {
     Flex
 } from '@chakra-ui/react';
 import Dashboard from './Dashboard';
+import DashHeader from './DashHeader';
 
 function StockVisForm() {
     const { colorMode } = useColorMode();
@@ -20,7 +21,8 @@ function StockVisForm() {
     const [functioncall, setFunctioncall] = useState();
     const [downloadCSV, setDownloadCSV] = useState();
     const [stockData, setStockData] = useState(null);
-    const [showDataTable, setShowDataTable] = useState(false);
+    const [userInput, setUserInput] = useState(null);
+    const [showDashboard, setShowDashboard] = useState(false);
 
     const handleChange = (e, field) => {
         switch (field) {
@@ -40,30 +42,26 @@ function StockVisForm() {
                 break;
         }
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        sendDataToServer(formData);
-    };
-
     const formData = {
         symbol: symbol,
         interval: interval,
         functioncall: functioncall,
         downloadCSV: downloadCSV,
     };
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        sendDataToServer(formData);
+    };
     const sendDataToServer = async (data) => {
         try {
 
             console.log(data);
+            setUserInput(data);
             await axios.post('http://127.0.0.1:5000/submit', data);
             const getResponse = await axios.get('http://127.0.0.1:5000/submit');
             console.log('GET Response:', getResponse);
             setStockData(getResponse.data);
-            setShowDataTable(true);
-            const rawdata = getResponse.data;
-            console.table(rawdata);
+            setShowDashboard(true);
         } catch (error) {
             console.error('Error sending data:', error);
         }
@@ -132,7 +130,8 @@ function StockVisForm() {
                 </form>
             </Box>
             <Box flex="3">
-                {showDataTable && <Dashboard data={stockData} />}
+                {showDashboard &&
+                <div> <DashHeader data={userInput} /> <Dashboard data={stockData} /></div>}
             </Box>
         </Flex>
     );

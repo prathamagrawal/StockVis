@@ -5,7 +5,7 @@ import Stimulator from './components/pages/Stimulator';
 import Visualiser from './components/pages/Visualiser';
 import { Box } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import './App.css'
 
 function App() {
   const [loading, setLoading] = useState(true);
