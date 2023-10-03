@@ -5,7 +5,7 @@ import {
     Heading,
     FormControl,
     FormLabel,
-    Input,
+Input,
     Select,
     Button,
     useColorMode,
@@ -74,7 +74,7 @@ function StockVisForm() {
                 <Heading mb={4}>Fill in the details:</Heading>
                 <form onSubmit={handleSubmit}>
                     <FormControl mb={4}>
-                        <FormLabel htmlFor="symbol">Symbol:</FormLabel>
+                    <FormLabel htmlFor="symbol">Symbol:</FormLabel>
                         <Input
                             type="text"
                             id="symbol"

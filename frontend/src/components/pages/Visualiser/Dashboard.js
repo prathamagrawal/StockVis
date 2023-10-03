@@ -16,7 +16,6 @@ const Dashboard = ({ data }) => {
         closeValues.push(item['4. close']);
         volumeValues.push(item['5. volume']);
     });
-    console.log(dateValues);
     return (
 
         <div><h1>Dashboard</h1></div>

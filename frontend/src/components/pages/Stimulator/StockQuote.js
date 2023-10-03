@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import { Box, Button, Select, VStack } from '@chakra-ui/react';
 
-import csvData from '../listings.csv';
+import csvData from '../../../static/listings.csv'
 
 function StockQuote() {
     const [data, setData] = useState([]);
