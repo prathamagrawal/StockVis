@@ -39,7 +39,6 @@ const DashHeader = ({ data }) => {
         alignItems: "center",
         height: "80px",
         backgroundColor: "#1a202c", 
-        borderRadius: "10px",
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
         color: "white", // Text color
         border: "1px solid #34495e", // Fine border color
