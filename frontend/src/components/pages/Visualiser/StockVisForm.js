@@ -5,7 +5,7 @@ import {
     Heading,
     FormControl,
     FormLabel,
-Input,
+    Input,
     Select,
     Button,
     useColorMode,
@@ -51,12 +51,10 @@ function StockVisForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         sendDataToServer(formData);
+        setUserInput(formData);
     };
     const sendDataToServer = async (data) => {
         try {
-
-            console.log(data);
-            setUserInput(data);
             await axios.post('http://127.0.0.1:5000/submit', data);
             const getResponse = await axios.get('http://127.0.0.1:5000/submit');
             console.log('GET Response:', getResponse);
