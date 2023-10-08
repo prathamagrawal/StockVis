@@ -4,7 +4,6 @@ import { Flex } from "@chakra-ui/react";
 
 
 const Dashboard = ({ data }) => {
-    // const columns = useBreakpointValue({ base: 1, sm: 2, md: 3 });
     const dateValues = [];
     const openValues = [];
     const highValues = [];
@@ -22,7 +21,6 @@ const Dashboard = ({ data }) => {
     });
 
     useEffect(() => {
-        // Your data and layout for the Plotly chart
         const xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
         const yArray = [55, 49, 44, 24, 15];
 
@@ -57,8 +55,10 @@ const Dashboard = ({ data }) => {
             paper_bgcolor: 'black',
             plot_bgcolor: 'black',
             font: {
-                color: 'white'
-            }
+                family: 'Product Sans',
+                size: 14,
+                color: 'white',
+            },
         };
 
         Plotly.newPlot("myPlot", plotData, layout);

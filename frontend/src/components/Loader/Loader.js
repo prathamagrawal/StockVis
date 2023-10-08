@@ -23,7 +23,7 @@ const Loader = () => {
             marginTop="-20vh" // Shift the spinner upward
         >
             <Spinner size="xl" />
-            <Text mt="4" fontWeight="bold" fontSize="5xl" fontFamily="Google Sans, sans-serif">
+            <Text mt="4" fontWeight="bold" fontSize="5xl" >
                 StockVis...
             </Text>
         </Box>

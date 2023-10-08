@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {
     Box,
-    Heading,
+    Text,
     FormControl,
     FormLabel,
     Input,
@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import Dashboard from './Dashboard';
 import DashHeader from './DashHeader';
+import '../../Applyfont.css';
 
 function StockVisForm() {
     const { colorMode } = useColorMode();
@@ -72,7 +73,9 @@ function StockVisForm() {
             {isMobile ? (
                 <VStack spacing={4}> {/* Use VStack for vertical stacking */}
                     <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
-                        <Heading mb={4}>Fill in the details:</Heading>
+
+                    <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
+
                         <form onSubmit={handleSubmit}>
                             <FormControl mb={4}>
                                 <FormLabel htmlFor="symbol">Symbol:</FormLabel>
@@ -138,7 +141,7 @@ function StockVisForm() {
             ) : (
                 <Flex width="100%">
                     <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
-                        <Heading mb={4}>Fill in the details:</Heading>
+                    <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
                         <form onSubmit={handleSubmit}>
                             <FormControl mb={4}>
                                 <FormLabel htmlFor="symbol">Symbol:</FormLabel>
@@ -195,7 +198,7 @@ function StockVisForm() {
                         </form>
                     </Box>
                     {showDashboard && (
-                        <Box borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
+                        <Box width="100%" borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
                             <DashHeader data={userInput} />
                             <Dashboard data={stockData} />
                         </Box>

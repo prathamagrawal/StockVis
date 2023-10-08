@@ -37,7 +37,7 @@ const HomePage = () => {
                     flexDirection="column"
                 >
                     <Image src={isDarkMode ? logoImage : logoTransparent} alt="Logo" maxH="50%" />
-                    <Text mt="4" fontSize="4xl" fontFamily="Google Sans, sans-serif" fontWeight="bold" letterSpacing="wide" color={isDarkMode ? 'white' : 'gray.700'}>
+                    <Text mt="4" fontSize="4xl"  fontWeight="bold" letterSpacing="wide" color={isDarkMode ? 'white' : 'gray.700'}>
                         Welcome to StockVis
                     </Text>
                 </Flex>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 import csvData from '../../../static/listings.csv';
 
@@ -38,7 +38,7 @@ const DashHeader = ({ data }) => {
         justifyContent: "center",
         alignItems: "center",
         height: "80px",
-        backgroundColor: "#1a202c", 
+        backgroundColor: "#1a202c",
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
         color: "white",
         border: "1px solid #34495e",
@@ -48,9 +48,9 @@ const DashHeader = ({ data }) => {
         <>
             {matchedRecord && (
                 <Flex style={headerStyles}>
-                    <Heading as="h1" fontSize="2xl">
+                    <Text fontSize="2xl" fontWeight="bold">
                         {matchedRecord.name} ({matchedRecord.symbol})
-                    </Heading>
+                    </Text>
                 </Flex>
             )}
         </>
