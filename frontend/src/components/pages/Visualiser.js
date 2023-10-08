@@ -6,9 +6,9 @@ import StockVisForm from './Visualiser/StockVisForm';
 function Visualiser() {
     return (
 
-            <Box> {/* First column, smaller */}
-                <StockVisForm />
-            </Box>
+        <Box> {/* First column, smaller */}
+            <StockVisForm />
+        </Box>
     );
 }
 

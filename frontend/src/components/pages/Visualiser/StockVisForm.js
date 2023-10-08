@@ -9,7 +9,9 @@ import {
     Select,
     Button,
     useColorMode,
-    Flex
+    Flex,
+    VStack,
+    useBreakpointValue,
 } from '@chakra-ui/react';
 import Dashboard from './Dashboard';
 import DashHeader from './DashHeader';
@@ -23,7 +25,7 @@ function StockVisForm() {
     const [stockData, setStockData] = useState(null);
     const [userInput, setUserInput] = useState(null);
     const [showDashboard, setShowDashboard] = useState(false);
-
+    const isMobile = useBreakpointValue({ base: true, md: false });
     const handleChange = (e, field) => {
         switch (field) {
             case 'symbol':
@@ -63,75 +65,144 @@ function StockVisForm() {
         } catch (error) {
             console.error('Error sending data:', error);
         }
-
     };
 
     return (
-        <Flex>
-            <Box flex="1" p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
-                <Heading mb={4}>Fill in the details:</Heading>
-                <form onSubmit={handleSubmit}>
-                    <FormControl mb={4}>
-                    <FormLabel htmlFor="symbol">Symbol:</FormLabel>
-                        <Input
-                            type="text"
-                            id="symbol"
-                            value={symbol}
-                            onChange={(e) => handleChange(e, 'symbol')}
-                            required
-                        />
-                    </FormControl>
-                    <FormControl mb={4}>
-                        <FormLabel htmlFor="interval">Interval:</FormLabel>
-                        <Select
-                            id="interval"
-                            value={interval}
-                            onChange={(e) => handleChange(e, 'interval')}
-                        >
-                            <option value="1min">1min</option>
-                            <option value="5min">5min</option>
-                            <option value="15min">15min</option>
-                            <option value="30min">30min</option>
-                            <option value="60min">60min</option>
-                        </Select>
-                    </FormControl>
-                    <FormControl mb={4}>
-                        <FormLabel htmlFor="downloadCSV">Download CSV?</FormLabel>
-                        <Select
-                            id="downloadCSV"
-                            value={downloadCSV}
-                            onChange={(e) => handleChange(e, 'downloadCSV')}
-                        >
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </Select>
-                    </FormControl>
-                    <FormControl mb={4}>
-                        <FormLabel htmlFor="functioncall">Function Call:</FormLabel>
-                        <Select
-                            id="functioncall"
-                            value={functioncall}
-                            onChange={(e) => handleChange(e, 'functioncall')}
-                        >
-                            <option value="TIME_SERIES_INTRADAY">TIME_SERIES_INTRADAY</option>
-                            <option value="TIME_SERIES_DAILY">TIME_SERIES_DAILY</option>
-                            {/* <option value="TIME_SERIES_DAILY_ADJUSTED">TIME_SERIES_DAILY_ADJUSTED</option> */}
-                            <option value="TIME_SERIES_WEEKLY">TIME_SERIES_WEEKLY</option>
-                            <option value="TIME_SERIES_WEEKLY_ADJUSTED">TIME_SERIES_WEEKLY_ADJUSTED</option>
-                            <option value="TIME_SERIES_MONTHLY">TIME_SERIES_MONTHLY</option>
-                            {/* <option value="TIME_SERIES_MONTHLY_ADJUSTED">TIME_SERIES_MONTHLY_ADJUSTED</option> */}
-                        </Select>
-                    </FormControl>
-                    <Button type="submit" colorScheme="teal">
-                        Submit
-                    </Button>
-                </form>
-            </Box>
-            <Box flex="3">
-                {showDashboard &&
-                <div> <DashHeader data={userInput} /> <Dashboard data={stockData} /></div>}
-            </Box>
-        </Flex>
+        <div>
+            {isMobile ? (
+                <VStack spacing={4}> {/* Use VStack for vertical stacking */}
+                    <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
+                        <Heading mb={4}>Fill in the details:</Heading>
+                        <form onSubmit={handleSubmit}>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="symbol">Symbol:</FormLabel>
+                                <Input
+                                    type="text"
+                                    id="symbol"
+                                    value={symbol}
+                                    onChange={(e) => handleChange(e, 'symbol')}
+                                    required
+                                />
+                            </FormControl>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="interval">Interval:</FormLabel>
+                                <Select
+                                    id="interval"
+                                    value={interval}
+                                    onChange={(e) => handleChange(e, 'interval')}
+                                >
+                                    <option value="1min">1min</option>
+                                    <option value="5min">5min</option>
+                                    <option value="15min">15min</option>
+                                    <option value="30min">30min</option>
+                                    <option value="60min">60min</option>
+                                </Select>
+                            </FormControl>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="downloadCSV">Download CSV?</FormLabel>
+                                <Select
+                                    id="downloadCSV"
+                                    value={downloadCSV}
+                                    onChange={(e) => handleChange(e, 'downloadCSV')}
+                                >
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </Select>
+                            </FormControl>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="functioncall">Function Call:</FormLabel>
+                                <Select
+                                    id="functioncall"
+                                    value={functioncall}
+                                    onChange={(e) => handleChange(e, 'functioncall')}
+                                >
+                                    <option value="TIME_SERIES_INTRADAY">TIME_SERIES_INTRADAY</option>
+                                    <option value="TIME_SERIES_DAILY">TIME_SERIES_DAILY</option>
+                                    <option value="TIME_SERIES_WEEKLY">TIME_SERIES_WEEKLY</option>
+                                    <option value="TIME_SERIES_WEEKLY_ADJUSTED">TIME_SERIES_WEEKLY_ADJUSTED</option>
+                                    <option value="TIME_SERIES_MONTHLY">TIME_SERIES_MONTHLY</option>
+                                </Select>
+                            </FormControl>
+                            <Button type="submit" colorScheme="teal">
+                                Submit
+                            </Button>
+                        </form>
+                    </Box>
+                    {showDashboard && (
+                        <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
+                            <DashHeader data={userInput} />
+                            <Dashboard data={stockData} />
+                        </Box>
+                    )}
+                </VStack>
+            ) : (
+                <Flex width="100%">
+                    <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
+                        <Heading mb={4}>Fill in the details:</Heading>
+                        <form onSubmit={handleSubmit}>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="symbol">Symbol:</FormLabel>
+                                <Input
+                                    type="text"
+                                    id="symbol"
+                                    value={symbol}
+                                    onChange={(e) => handleChange(e, 'symbol')}
+                                    required
+                                />
+                            </FormControl>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="interval">Interval:</FormLabel>
+                                <Select
+                                    id="interval"
+                                    value={interval}
+                                    onChange={(e) => handleChange(e, 'interval')}
+                                >
+                                    <option value="1min">1min</option>
+                                    <option value="5min">5min</option>
+                                    <option value="15min">15min</option>
+                                    <option value="30min">30min</option>
+                                    <option value="60min">60min</option>
+                                </Select>
+                            </FormControl>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="downloadCSV">Download CSV?</FormLabel>
+                                <Select
+                                    id="downloadCSV"
+                                    value={downloadCSV}
+                                    onChange={(e) => handleChange(e, 'downloadCSV')}
+                                >
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </Select>
+                            </FormControl>
+                            <FormControl mb={4}>
+                                <FormLabel htmlFor="functioncall">Function Call:</FormLabel>
+                                <Select
+                                    id="functioncall"
+                                    value={functioncall}
+                                    onChange={(e) => handleChange(e, 'functioncall')}
+                                >
+                                    <option value="TIME_SERIES_INTRADAY">TIME_SERIES_INTRADAY</option>
+                                    <option value="TIME_SERIES_DAILY">TIME_SERIES_DAILY</option>
+                                    <option value="TIME_SERIES_WEEKLY">TIME_SERIES_WEEKLY</option>
+                                    <option value="TIME_SERIES_WEEKLY_ADJUSTED">TIME_SERIES_WEEKLY_ADJUSTED</option>
+                                    <option value="TIME_SERIES_MONTHLY">TIME_SERIES_MONTHLY</option>
+                                </Select>
+                            </FormControl>
+                            <Button type="submit" colorScheme="teal">
+                                Submit
+                            </Button>
+                        </form>
+                    </Box>
+                    {showDashboard && (
+                        <Box borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
+                            <DashHeader data={userInput} />
+                            <Dashboard data={stockData} />
+                        </Box>
+                    )}
+                </Flex>
+            )}
+        </div>
     );
 }
 
