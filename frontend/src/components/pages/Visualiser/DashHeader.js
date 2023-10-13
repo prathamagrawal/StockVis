@@ -38,9 +38,9 @@ const DashHeader = ({ data }) => {
         justifyContent: "center",
         alignItems: "center",
         height: "80px",
-        backgroundColor: "#1a202c",
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-        color: "white",
+        // backgroundColor: "#1a202c",
+        // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        // color: "white",
         border: "1px solid #34495e",
     };
 

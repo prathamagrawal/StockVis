@@ -1,9 +1,10 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import {  HStack,VStack } from '@chakra-ui/react';
 import { CategoryScale } from 'chart.js';
 import Chart from "chart.js/auto";
-import MultipleLineChart from './Graphs/MultipleLineChart.js';
-
+import MultipleLineChart from '../../Graphs/MultipleLineChart.js';
+import SingleLineChart from '../../Graphs/SingleLineChart.js';
+// import CandleStick from '../../Graphs/CandleStick.js';
 
 Chart.register(CategoryScale);
 
@@ -13,36 +14,47 @@ const Dashboard = ({ data }) => {
         dateStrings.forEach((dateString, index) => {
             const date = new Date(dateString);
             const formattedDate = date.toLocaleDateString("en", {
-                year: "2-digit",
+                // year: "2-digit",
                 month: "2-digit",
                 day: "2-digit",
             });
-            const formattedTime = date.toLocaleTimeString("en", {
-                hour: "2-digit",
-                minute: "2-digit",
-            });
-            dateStrings[index] = `${formattedDate} ${formattedTime}`;
+            // const formattedTime = date.toLocaleTimeString("en", {
+            //     hour: "2-digit",
+            //     minute: "2-digit",
+            // });
+            // dateStrings[index] = `${formattedDate} ${formattedTime}`;
+            dateStrings[index] = `${formattedDate}`;
         });
     }
 
 
-
     const dateValues = data.map((item) => item['date']);
-    const openValues = data.map((item) => item['1. open']);
-    const closeValues = data.map((item) => item['4. close']);
-    const highValues = data.map((item) => item['2. high']);
-    const lowValues = data.map((item) => item['3. low']);
-    // const volumeValues = data.map((item) => item['5. volume']);
+    const openValues = data.map((item) => parseFloat(item['1. open']));
+    const closeValues = data.map((item) => parseFloat(item['4. close']));
+    const highValues = data.map((item) => parseFloat(item['2. high']));
+    const lowValues = data.map((item) => parseFloat(item['3. low']));
+    const volumeValues = data.map((item) => parseFloat(item['5. volume']));
     convertDateStringsInPlace(dateValues);
 
-
-        return (
-            <Flex width="100%">
+    const pertreturn = closeValues.map((close, index) => {
+        const open = openValues[index];
+        return ((close - open) / close) * 100;
+    });
+    
+    console.log(pertreturn);
+    return (
+        <VStack width="100%">
+            <HStack width="100%">
                 <MultipleLineChart label1={'Open'} label2={'Close'} openData={openValues} closeData={closeValues} dates={dateValues} lastNumber={-75} />
                 <MultipleLineChart label1={'Low'} label2={'High'} openData={lowValues} closeData={highValues} dates={dateValues} lastNumber={-75} />
-            </Flex>
-        );
-    };
+                <SingleLineChart volumeData={volumeValues} dateData={dateValues} lastNumber={-75} labelName={"Volume (in millions)"}/>
+            </HStack>
+            <HStack height="50%">    
+                {/* <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} /> */}
+            </HStack>
+        </VStack>
+    );
+};
 
-    export default Dashboard;
+export default Dashboard;
 
