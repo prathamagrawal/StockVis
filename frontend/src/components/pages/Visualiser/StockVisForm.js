@@ -139,8 +139,8 @@ function StockVisForm() {
                     )}
                 </VStack>
             ) : (
-                <Flex width="100%">
-                    <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
+                <Flex>
+                    <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'} width="20%">
                     <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
                         <form onSubmit={handleSubmit}>
                             <FormControl mb={4}>
@@ -198,7 +198,7 @@ function StockVisForm() {
                         </form>
                     </Box>
                     {showDashboard && (
-                        <Box width="100%" borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
+                        <Box width="80%" borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
                             <DashHeader data={userInput} />
                             <Dashboard data={stockData} />
                         </Box>

@@ -1,96 +1,48 @@
-import React, { useEffect } from 'react';
-import Plotly from 'plotly.js-dist';
-import { Flex } from "@chakra-ui/react";
+import React from 'react';
+import { Flex } from '@chakra-ui/react';
+import { CategoryScale } from 'chart.js';
+import Chart from "chart.js/auto";
+import MultipleLineChart from './Graphs/MultipleLineChart.js';
 
+
+Chart.register(CategoryScale);
 
 const Dashboard = ({ data }) => {
-    const dateValues = [];
-    const openValues = [];
-    const highValues = [];
-    const lowValues = [];
-    const closeValues = [];
-    const volumeValues = [];
 
-    data.forEach((item) => {
-        dateValues.push(item['date'])
-        openValues.push(item['1. open']);
-        highValues.push(item['2. high']);
-        lowValues.push(item['3. low']);
-        closeValues.push(item['4. close']);
-        volumeValues.push(item['5. volume']);
-    });
+    function convertDateStringsInPlace(dateStrings) {
+        dateStrings.forEach((dateString, index) => {
+            const date = new Date(dateString);
+            const formattedDate = date.toLocaleDateString("en", {
+                year: "2-digit",
+                month: "2-digit",
+                day: "2-digit",
+            });
+            const formattedTime = date.toLocaleTimeString("en", {
+                hour: "2-digit",
+                minute: "2-digit",
+            });
+            dateStrings[index] = `${formattedDate} ${formattedTime}`;
+        });
+    }
 
-    useEffect(() => {
-        const xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
-        const yArray = [55, 49, 44, 24, 15];
 
-        const plotData = [{
-            x: xArray,
-            y: yArray,
-            type: "bar",
-            orientation: "v",
-            marker: { color: "rgba(0,0,255)" }
-        }];
 
-        const layout = {
-            title: "World Wide Wine Production",
-            xaxis: {
-                title: 'Countries',
-                titlefont: {
-                    color: 'white'
-                },
-                tickfont: {
-                    color: 'white'
-                }
-            },
-            yaxis: {
-                title: 'Production',
-                titlefont: {
-                    color: 'white'
-                },
-                tickfont: {
-                    color: 'white'
-                }
-            },
-            paper_bgcolor: 'black',
-            plot_bgcolor: 'black',
-            font: {
-                family: 'Product Sans',
-                size: 14,
-                color: 'white',
-            },
-        };
+    const dateValues = data.map((item) => item['date']);
+    const openValues = data.map((item) => item['1. open']);
+    const closeValues = data.map((item) => item['4. close']);
+    const highValues = data.map((item) => item['2. high']);
+    const lowValues = data.map((item) => item['3. low']);
+    // const volumeValues = data.map((item) => item['5. volume']);
+    convertDateStringsInPlace(dateValues);
 
-        Plotly.newPlot("myPlot", plotData, layout);
-    }, []);
 
-    return (
-        <Flex width="100%">
-            <div><div id="myPlot"></div> </div>
-            {/* <Grid templateColumns={`repeat(${columns}, 1fr)`} gap={4}>
-                <GridItem colSpan={1}>
-                    <Box bg="teal.200" p={4} borderRadius="md">
-                        Item 1
-                    </Box>
-                </GridItem>
-                <GridItem colSpan={1}>
-                    <Box bg="teal.300" p={4} borderRadius="md">
-                        Item 2
-                    </Box>
-                </GridItem>
-                <GridItem colSpan={1}>
-                    <Box bg="teal.400" p={4} borderRadius="md">
-                        Item 3
-                    </Box>
-                </GridItem>
-                <GridItem colSpan={3}>
-                    <Box bg="teal.500" p={4} borderRadius="md">
-                        Item 4 (spans 3 columns)
-                    </Box>
-                </GridItem>
-            </Grid> */}
-        </Flex>
-    );
-};
+        return (
+            <Flex width="100%">
+                <MultipleLineChart label1={'Open'} label2={'Close'} openData={openValues} closeData={closeValues} dates={dateValues} lastNumber={-75} />
+                <MultipleLineChart label1={'Low'} label2={'High'} openData={lowValues} closeData={highValues} dates={dateValues} lastNumber={-75} />
+            </Flex>
+        );
+    };
 
-export default Dashboard;
+    export default Dashboard;
+

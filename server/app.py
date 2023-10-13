@@ -18,10 +18,11 @@ def submit_form():
     if(request.method == 'POST'):
         response = request.json 
         data,metadata=getData(response,alphaKey)
-        data['date'] = data.index
-        fetchdata["raw"]=data
-        
-        print(data)
+        reversed_df = data.iloc[::-1]
+        print(reversed_df)
+        reversed_df['date'] = reversed_df.index
+        fetchdata["raw"]=reversed_df
+
         return jsonify(response)
     if(request.method =='GET'):
 
