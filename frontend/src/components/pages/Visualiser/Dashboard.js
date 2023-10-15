@@ -1,20 +1,21 @@
 import React from 'react';
-import {  HStack,VStack } from '@chakra-ui/react';
+import {   HStack,VStack } from '@chakra-ui/react';
 import { CategoryScale } from 'chart.js';
 import Chart from "chart.js/auto";
 import MultipleLineChart from '../../Graphs/MultipleLineChart.js';
 import SingleLineChart from '../../Graphs/SingleLineChart.js';
-// import CandleStick from '../../Graphs/CandleStick.js';
+import CandleStick from '../../Graphs/CandleStick.js';
 
 Chart.register(CategoryScale);
 
 const Dashboard = ({ data }) => {
+    console.log(data);
 
     function convertDateStringsInPlace(dateStrings) {
         dateStrings.forEach((dateString, index) => {
             const date = new Date(dateString);
             const formattedDate = date.toLocaleDateString("en", {
-                // year: "2-digit",
+                year: "2-digit",
                 month: "2-digit",
                 day: "2-digit",
             });
@@ -35,6 +36,7 @@ const Dashboard = ({ data }) => {
     const lowValues = data.map((item) => parseFloat(item['3. low']));
     const volumeValues = data.map((item) => parseFloat(item['5. volume']));
     convertDateStringsInPlace(dateValues);
+    console.log(dateValues);
 
     const pertreturn = closeValues.map((close, index) => {
         const open = openValues[index];
@@ -43,18 +45,22 @@ const Dashboard = ({ data }) => {
     
     console.log(pertreturn);
     return (
-        <VStack width="100%">
+        <VStack>
             <HStack width="100%">
                 <MultipleLineChart label1={'Open'} label2={'Close'} openData={openValues} closeData={closeValues} dates={dateValues} lastNumber={-75} />
                 <MultipleLineChart label1={'Low'} label2={'High'} openData={lowValues} closeData={highValues} dates={dateValues} lastNumber={-75} />
                 <SingleLineChart volumeData={volumeValues} dateData={dateValues} lastNumber={-75} labelName={"Volume (in millions)"}/>
             </HStack>
-            <HStack height="50%">    
-                {/* <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} /> */}
-            </HStack>
+            <VStack width="100%">
+                <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} lastNumber={-50} />
+            </VStack>
         </VStack>
+
+        
     );
 };
 
 export default Dashboard;
+
+
 

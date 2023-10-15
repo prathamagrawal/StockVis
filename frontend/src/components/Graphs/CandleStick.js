@@ -1,46 +1,53 @@
+// CandlestickChart.js
 import React from 'react';
-import Plot from 'react-plotly.js';
+import Highcharts from 'highcharts/highstock';
+import HighchartsReact from 'highcharts-react-official';
+// import { Flex } from '@chakra-ui/react';
+import './style.css';
 
-const CandleStick = ({ dateValues, openValues, highValues, lowValues, closeValues }) => {
-    
-    const trace = {
-        x: dateValues,
-        close: closeValues,
-        high: highValues,
-        low: lowValues,
-        open: openValues,
+const CandlestickChart = ({ dateValues, openValues, highValues, lowValues, closeValues, lastNumber }) => {
+  // Combine the data into an array of arrays for Highcharts
+  
+  const rawdata = dateValues.map((date, index) => [
+    date,
+    openValues[index],
+    highValues[index],
+    lowValues[index],
+    closeValues[index],
+  ]);
+  const data = rawdata.slice(lastNumber);
+
+  const options = {
+
+    rangeSelector: {
+      selected: 1,
+    },
+    xAxis: {
+      type: 'category',
+    },
+    plotOptions: {
+      candlestick: {
+        animation: true, 
+      },
+    },
+    title: {
+      text: 'Candlestick Chart',
+    },
+    series: [
+      {
         type: 'candlestick',
-        name: 'Candlesticks',
-    };
+        name: 'Candlestick',
+        data: data,
+        color: '#4cc1c0',
+      },
+    ],
+  };
 
-    return (
-        <Plot
-            data={[trace]}
-            layout={{
-                dragmode:'zoom',
-                title: 'Candlestick Chart',
-                xaxis: {
-                    rangeslider:{
-                        visible: false,
-                    },
-                    title: 'Date',
-                },
-                yaxis: {
-                    title: 'Price',
-                },
-                shapes:'rect',
-                xref:'x',
-                yref:'paper',
-                fillcolor:'#d3d3d3',
-                opacity:0.2,
-                line:{
-                    width:0
-                }
-
-            }
-        }
-        />
-    );
+  return (
+    <div className='chart-wrapper'>
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  );
 };
 
-export default CandleStick;
+export default CandlestickChart;

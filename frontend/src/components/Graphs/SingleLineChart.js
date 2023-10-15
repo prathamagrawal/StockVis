@@ -17,10 +17,25 @@ const SingleLineChart = ({ volumeData, dateData,lastNumber,labelName }) => {
             },
         ],
     };
+    let delayed
+    const options={
+        animation:{
+            onComplete: () =>{
+                delayed=true;
+            },
+            delay: (context) => {
+                let delay = 0;
+                if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 100 + context.datasetIndex * 10;
+                }
+                return delay;
+            }
+        }
+    };
 
     return (
         <Flex width="100%">
-            <Line data={data} />
+            <Line data={data} options={options}/>
         </Flex>
         
     );
