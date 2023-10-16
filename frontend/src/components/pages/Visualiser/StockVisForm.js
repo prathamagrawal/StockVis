@@ -74,7 +74,7 @@ function StockVisForm() {
                 <VStack spacing={4}> {/* Use VStack for vertical stacking */}
                     <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
 
-                    <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
+                        <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
 
                         <form onSubmit={handleSubmit}>
                             <FormControl mb={4}>
@@ -141,7 +141,7 @@ function StockVisForm() {
             ) : (
                 <Flex>
                     <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'} width="20%">
-                    <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
+                        <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
                         <form onSubmit={handleSubmit}>
                             <FormControl mb={4}>
                                 <FormLabel htmlFor="symbol">Symbol:</FormLabel>

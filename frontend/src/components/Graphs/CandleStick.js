@@ -2,12 +2,11 @@
 import React from 'react';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
-// import { Flex } from '@chakra-ui/react';
 import './style.css';
 
 const CandlestickChart = ({ dateValues, openValues, highValues, lowValues, closeValues, lastNumber }) => {
   // Combine the data into an array of arrays for Highcharts
-  
+
   const rawdata = dateValues.map((date, index) => [
     date,
     openValues[index],
@@ -18,25 +17,45 @@ const CandlestickChart = ({ dateValues, openValues, highValues, lowValues, close
   const data = rawdata.slice(lastNumber);
 
   const options = {
-
+    chart: {
+      backgroundColor: '#1a202c',
+    },
     rangeSelector: {
       selected: 1,
     },
     xAxis: {
       type: 'category',
+      labels: {
+        style: {
+          color: 'white', // Set the x-axis labels color to white
+        },
+      },
+    },
+    yAxis: {
+      labels: {
+        style: {
+          color: 'white', // Set the y-axis labels color to white
+        },
+      },
     },
     plotOptions: {
       candlestick: {
-        animation: true, 
+        animation: true,
       },
     },
     title: {
       text: 'Candlestick Chart',
+      style: {
+        color: 'white', // Set the chart title color to white
+      },
     },
     series: [
       {
         type: 'candlestick',
         name: 'Candlestick',
+        style:{
+          color:'whtie',
+        },
         data: data,
         color: '#4cc1c0',
       },
