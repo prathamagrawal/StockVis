@@ -55,8 +55,6 @@ const Dashboard = ({ data }) => {
                 <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} lastNumber={-50} />
             </VStack>
         </VStack>
-
-        
     );
 };
 
