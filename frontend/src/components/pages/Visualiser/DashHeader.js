@@ -48,7 +48,7 @@ const DashHeader = ({ data }) => {
         <>
             {matchedRecord && (
                 <Flex style={headerStyles}>
-                    <Text fontSize="2xl" fontWeight="bold">
+                    <Text fontSize="xl" fontWeight="bold">
                         {matchedRecord.name} ({matchedRecord.symbol})
                     </Text>
                 </Flex>

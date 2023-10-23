@@ -17,6 +17,7 @@ const CandlestickChart = ({ dateValues, openValues, highValues, lowValues, close
   const data = rawdata.slice(lastNumber);
 
   const options = {
+
     chart: {
       backgroundColor: '#1a202c',
     },
@@ -26,6 +27,7 @@ const CandlestickChart = ({ dateValues, openValues, highValues, lowValues, close
     xAxis: {
       type: 'category',
       labels: {
+        enabled: true,
         style: {
           color: 'white', // Set the x-axis labels color to white
         },
@@ -39,9 +41,11 @@ const CandlestickChart = ({ dateValues, openValues, highValues, lowValues, close
       },
     },
     plotOptions: {
-      candlestick: {
-        animation: true,
-      },
+      series: {
+        animation: {
+          duration: 2000
+        }
+      }
     },
     title: {
       text: 'Candlestick Chart',
@@ -52,9 +56,8 @@ const CandlestickChart = ({ dateValues, openValues, highValues, lowValues, close
     series: [
       {
         type: 'candlestick',
-        name: 'Candlestick',
-        style:{
-          color:'whtie',
+        style: {
+          color: 'whtie',
         },
         data: data,
         color: '#4cc1c0',

@@ -1,10 +1,11 @@
 import React from 'react';
-import {   HStack,VStack } from '@chakra-ui/react';
+import { HStack, VStack } from '@chakra-ui/react';
 import { CategoryScale } from 'chart.js';
 import Chart from "chart.js/auto";
 import MultipleLineChart from '../../Graphs/MultipleLineChart.js';
 import SingleLineChart from '../../Graphs/SingleLineChart.js';
 import CandleStick from '../../Graphs/CandleStick.js';
+import { useBreakpointValue } from '@chakra-ui/react';
 
 Chart.register(CategoryScale);
 
@@ -28,7 +29,7 @@ const Dashboard = ({ data }) => {
         });
     }
 
-
+    const isMobile = useBreakpointValue({ base: true, md: false });
     const dateValues = data.map((item) => item['date']);
     const openValues = data.map((item) => parseFloat(item['1. open']));
     const closeValues = data.map((item) => parseFloat(item['4. close']));
@@ -42,23 +43,35 @@ const Dashboard = ({ data }) => {
         const open = openValues[index];
         return ((close - open) / close) * 100;
     });
-    
+
     console.log(pertreturn);
     return (
-        <VStack>
-            <HStack width="100%">
-                <MultipleLineChart label1={'Open'} label2={'Close'} openData={openValues} closeData={closeValues} dates={dateValues} lastNumber={-75} />
-                <MultipleLineChart label1={'Low'} label2={'High'} openData={lowValues} closeData={highValues} dates={dateValues} lastNumber={-75} />
-                <SingleLineChart volumeData={volumeValues} dateData={dateValues} lastNumber={-75} labelName={"Volume (in millions)"}/>
-            </HStack>
-            <VStack width="100%">
-                <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} lastNumber={-50} />
-            </VStack>
-        </VStack>
+        <div>
+            {isMobile ? (
+                <VStack>
+                    <MultipleLineChart label1={'Open'} label2={'Close'} openData={openValues} closeData={closeValues} dates={dateValues} lastNumber={-75} />
+                    <MultipleLineChart label1={'Low'} label2={'High'} openData={lowValues} closeData={highValues} dates={dateValues} lastNumber={-75} />
+                    <SingleLineChart volumeData={volumeValues} dateData={dateValues} lastNumber={-75} labelName={"Volume (in millions)"} />
+                    <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} lastNumber={-14} />
+                </VStack>
+
+
+            ) : (
+                <VStack>
+                    <HStack width="100%">
+                        <MultipleLineChart label1={'Open'} label2={'Close'} openData={openValues} closeData={closeValues} dates={dateValues} lastNumber={-75} />
+                        <MultipleLineChart label1={'Low'} label2={'High'} openData={lowValues} closeData={highValues} dates={dateValues} lastNumber={-75} />
+                        <SingleLineChart volumeData={volumeValues} dateData={dateValues} lastNumber={-75} labelName={"Volume (in millions)"} />
+                    </HStack>
+                    <VStack width="100%">
+                        <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} lastNumber={-30} />
+                    </VStack>
+                </VStack>
+
+            )}
+        </div>
     );
 };
 
 export default Dashboard;
-
-
 

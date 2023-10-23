@@ -1,7 +1,9 @@
 import React from 'react';
 import { Flex, Text, Button, Image, ChakraProvider, Switch, useColorMode } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhoneVolume, faArrowTrendUp, faMoneyCheckDollar } from '@fortawesome/free-solid-svg-icons';
+import { faPhoneVolume, 
+    // faArrowTrendUp,
+    faMoneyCheckDollar } from '@fortawesome/free-solid-svg-icons';
 import { css } from '@emotion/react';
 import logoTransparent from './images/logoTransparent.svg';
 import logoImage from './images/Logo.svg';
@@ -14,12 +16,16 @@ const HomePage = () => {
 
     const navigate = useNavigate(); 
 
-    const handleStockFun = () => {
-        navigate('/stimulator')
-    };
+    // const handleStockFun = () => {
+    //     navigate('/stimulator')
+    // };
 
     const handleStockVis = () => {
         navigate('/dashboard')
+    };
+
+    const handleContact = () => {
+        window.location.href = 'https://www.prathamagrawal.tech';
     };
 
     return (
@@ -62,9 +68,9 @@ const HomePage = () => {
                         mb="4"
                         onClick={handleStockVis}
                     >
-                        Stock Visualization
+                        Stock Dashboard
                     </Button>
-                    <Button
+                    {/* <Button
                         size="lg"
                         colorScheme="green"
                         variant="outline"
@@ -76,7 +82,7 @@ const HomePage = () => {
                         onClick={handleStockFun}
                     >
                         Stock Prediction Fun
-                    </Button>
+                    </Button> */}
                     <Button
                         size="lg"
                         colorScheme="purple"
@@ -86,6 +92,7 @@ const HomePage = () => {
                         leftIcon={<FontAwesomeIcon icon={faPhoneVolume} />}
                         css={buttonStyles}
                         mb="4"
+                        onClick={handleContact}
                     >
                         Contact me
                     </Button>

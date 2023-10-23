@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
     Box,
     Text,
     FormControl,
     FormLabel,
-    Input,
     Select,
     Button,
     useColorMode,
@@ -13,11 +12,29 @@ import {
     VStack,
     useBreakpointValue,
 } from '@chakra-ui/react';
+import Papa from 'papaparse';
 import Dashboard from './Dashboard';
 import DashHeader from './DashHeader';
 import '../../Applyfont.css';
+import csvData from '../../../static/listings.csv';
 
 function StockVisForm() {
+    const [formInput, setformInput] = useState([]);
+    // const [selectedItem, setSelectedItem] = useState('');
+    useEffect(() => {
+        Papa.parse(csvData, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: result => {
+                setformInput(result.data);
+            }
+        });
+    }, []);
+    // const handleDropdownChange = event => {
+    //     setSelectedItem(event.target.value);
+    // };
+
     const { colorMode } = useColorMode();
     const [symbol, setSymbol] = useState('');
     const [interval, setInterval] = useState();
@@ -53,6 +70,7 @@ function StockVisForm() {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formData);
         sendDataToServer(formData);
         setUserInput(formData);
     };
@@ -68,24 +86,25 @@ function StockVisForm() {
         }
     };
 
+
+    
     return (
         <div>
             {isMobile ? (
                 <VStack spacing={4}> {/* Use VStack for vertical stacking */}
                     <Box p={4} borderRadius="md" boxShadow="md" bg={colorMode === 'light' ? 'white' : 'gray.800'}>
-
                         <Text fontSize="3xl" fontWeight="bold">Fill in the details:</Text>
-
                         <form onSubmit={handleSubmit}>
-                            <FormControl mb={4}>
+                        <FormControl mb={4}>
                                 <FormLabel htmlFor="symbol">Symbol:</FormLabel>
-                                <Input
-                                    type="text"
-                                    id="symbol"
-                                    value={symbol}
-                                    onChange={(e) => handleChange(e, 'symbol')}
-                                    required
-                                />
+                                <Select value={symbol} onChange={(e) => handleChange(e, 'symbol')} isSearchable isClearablei>
+                                    {/* <option value="">Select an option</option> */}
+                                    {formInput.map(item => (
+                                        <option key={item.symbol} value={item.symbol}>
+                                            {item.name} ({item.symbol})
+                                        </option>
+                                    ))}
+                                </Select>
                             </FormControl>
                             <FormControl mb={4}>
                                 <FormLabel htmlFor="interval">Interval:</FormLabel>
@@ -145,13 +164,14 @@ function StockVisForm() {
                         <form onSubmit={handleSubmit}>
                             <FormControl mb={4}>
                                 <FormLabel htmlFor="symbol">Symbol:</FormLabel>
-                                <Input
-                                    type="text"
-                                    id="symbol"
-                                    value={symbol}
-                                    onChange={(e) => handleChange(e, 'symbol')}
-                                    required
-                                />
+                                <Select value={symbol} onChange={(e) => handleChange(e, 'symbol')} isSearchable isClearablei>
+                                    {/* <option value="">Select an option</option> */}
+                                    {formInput.map(item => (
+                                        <option key={item.symbol} value={item.symbol}>
+                                            {item.name} ({item.symbol})
+                                        </option>
+                                    ))}
+                                </Select>
                             </FormControl>
                             <FormControl mb={4}>
                                 <FormLabel htmlFor="interval">Interval:</FormLabel>
