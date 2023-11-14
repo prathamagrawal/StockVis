@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, VStack } from '@chakra-ui/react';
+import { HStack, VStack,Box } from '@chakra-ui/react';
 import { CategoryScale } from 'chart.js';
 import Chart from "chart.js/auto";
 import MultipleLineChart from '../../Graphs/MultipleLineChart.js';
@@ -67,8 +67,8 @@ const Dashboard = ({ data }) => {
                         <CandleStick dateValues={dateValues} openValues={openValues} highValues={highValues} lowValues={lowValues} closeValues={closeValues} lastNumber={-30} />
                     </VStack>
                 </VStack>
-
             )}
+            <Box fontWeight="bold" textAlign="center"> More Interesting Visualisations Incoming..</Box>
         </div>
     );
 };

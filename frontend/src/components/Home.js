@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, Text, Button, Image, ChakraProvider, Switch, useColorMode } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneVolume, 
-    // faArrowTrendUp,
+    faArrowTrendUp,
     faMoneyCheckDollar } from '@fortawesome/free-solid-svg-icons';
 import { css } from '@emotion/react';
 import logoTransparent from './images/logoTransparent.svg';
@@ -16,9 +16,9 @@ const HomePage = () => {
 
     const navigate = useNavigate(); 
 
-    // const handleStockFun = () => {
-    //     navigate('/stimulator')
-    // };
+    const handleStockFun = () => {
+        navigate('/stimulator')
+    };
 
     const handleStockVis = () => {
         navigate('/dashboard')
@@ -59,7 +59,7 @@ const HomePage = () => {
 
                     <Button
                         size="lg"
-                        colorScheme="blue"
+                        colorScheme="darkblue"
                         variant="outline"
                         width="300px"
                         height="100px"
@@ -70,7 +70,7 @@ const HomePage = () => {
                     >
                         Stock Dashboard
                     </Button>
-                    {/* <Button
+                    <Button
                         size="lg"
                         colorScheme="green"
                         variant="outline"
@@ -82,7 +82,7 @@ const HomePage = () => {
                         onClick={handleStockFun}
                     >
                         Stock Prediction Fun
-                    </Button> */}
+                    </Button>
                     <Button
                         size="lg"
                         colorScheme="purple"
