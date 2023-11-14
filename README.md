@@ -1,6 +1,6 @@
 <h1 align='center'>StockVis - Stock Price Visualization App</h1>
 <div align='center'>
-  <img width="1439" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/fd8cebb3-def1-4f63-b509-43aba3b19925">
+  <img width="1440" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/586c7f65-7e59-40b0-b159-367085070c1b">
 </div>
 
 StockVis is a powerful application built using ReactJS, Python, and Plotly.js that allows you to visualize stock prices based on different parameters. Whether you're an investor, trader, or just curious about stock market trends, StockVis provides you with a visually engaging way to explore and analyze stock price data.
@@ -59,9 +59,9 @@ flask run
 <img width="1440" alt="image" align="center" src="https://github.com/prathamagrawal/StockVis/assets/58286330/2089f632-afba-49d0-9894-a5e522f84727">
 
 ### Stock Dashboard
-<img width="1440" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/4966ea3b-66cd-40f0-92b2-81ee2e69d04e">
+<img width="1440" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/1c3b9d0d-0361-4566-a7ba-2f040855b2a0">
 
-## More Features would be realeased soon..
-<div align="center"><img width="602" alt="image" align="center" src="https://github.com/prathamagrawal/StockVis/assets/58286330/2b26ad8d-c5d3-48c4-b7c8-5fdcfc48205f">
+## More Features would be released soon..
+<img width="710" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/a64d8385-266c-44ad-834d-58dea8ea3df2">
 </div>
 
