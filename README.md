@@ -62,6 +62,7 @@ flask run
 <img width="1440" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/1c3b9d0d-0361-4566-a7ba-2f040855b2a0">
 
 ## More Features would be released soon..
-<img width="710" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/a64d8385-266c-44ad-834d-58dea8ea3df2">
+<div align="center">
+<img width="1440" alt="image" src="https://github.com/prathamagrawal/StockVis/assets/58286330/7487d5dc-fee9-420f-93c5-26a17a434eb5">
 </div>
 
